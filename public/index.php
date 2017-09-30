@@ -1,8 +1,6 @@
 <?php
 $containerBuilder = require __DIR__ . '/../bootstrap.php';
 
-$test = new \GSoares\CweTop25\Cwe89\Wrong();
-
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\XmlFileLoader;
 use Symfony\Component\Routing\RequestContext;

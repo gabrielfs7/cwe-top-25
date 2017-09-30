@@ -16,7 +16,17 @@
                 <th>Descriton</th>
                 <td>{{ cwe.description }}</td>
             </tr>
+            <tr>
+                <th>Definition</th>
+                <td>
+                    {% set cweLink = 'http://cwe.mitre.org/data/definitions/' ~ (cwe.id|replace({'CWE-': ''})) ~ '.html'%}
+                    <a href="{{ cweLink }}">
+                        {{ cweLink }}
+                    </a>
+                </td>
+            </tr>
         </table>
+        <h2>PHP Sample</h2>
         {% block subcontent %}{% endblock %}
     </div>
 </div>

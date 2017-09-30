@@ -3,5 +3,8 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="cwe.89.sample" class="GSoares\CweTop25\Cwe89\Sample">
+            <argument id="database.connection" type="service"/>
+        </service>
     </services>
 </container>

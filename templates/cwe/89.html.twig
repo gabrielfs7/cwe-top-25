@@ -1,2 +1,40 @@
 {% extends 'cwe/base.html.twig' %}
-{% block subcontent %}{% endblock %}
+{% block subcontent %}
+<p class="alert alert-info">
+    Try to type username <strong>unknown</strong> and password <strong>name' OR 'a'='a</strong>.
+
+    It will add an <strong>OR</strong> condition to the query, allowing get the first user even if it does not exist.
+</p>
+
+{% if user %}
+    <div class="alert alert-success">
+        User found:
+
+        <ul>
+            <li>Name = {{ user.name }}</li>
+            <li>Password = {{ user.password }}</li>
+        </ul>
+    </div>
+{% endif %}
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <label>
+                Username
+            </label>
+            <input type="text" name="username" value="unknown" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label>
+                Password
+            </label>
+            <input type="text" name="password" value="name' OR 'a'='a" class="form-control">
+        </div>
+        <div class="col-md-12 text-right">
+            <br/>
+            <input name="submit" type="submit" class="btn btn-danger" value="Unsafe submit"/>
+            <input name="submit" type="submit" class="btn btn-success" value="Safe submit"/>
+        </div>
+    </div>
+</form>
+{% endblock %}
