@@ -1,0 +1,23 @@
+{% extends 'base/base.html.twig' %}
+{% block title %}<i class="glyphicon glyphicon-alert"></i> {{ cwe.id }}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table">
+            <tr>
+                <th>Rank</th>
+                <td>{{ cwe.position }}</td>
+            </tr>
+            <tr>
+                <th>Score</th>
+                <td>{{ cwe.score }}</td>
+            </tr>
+            <tr>
+                <th>Descriton</th>
+                <td>{{ cwe.description }}</td>
+            </tr>
+        </table>
+        {% block subcontent %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

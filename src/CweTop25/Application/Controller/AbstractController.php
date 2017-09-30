@@ -28,6 +28,22 @@ class AbstractController implements ControllerInterface
     }
 
     /**
+     * @param $id
+     * @return mixed
+     */
+    protected function getCweInfoById($id)
+    {
+        return current(
+            array_filter(
+                $this->getCweMenu(),
+                function ($val) use ($id) {
+                    return array_search("CWE-$id", $val) !== false;
+                }
+            )
+        );
+    }
+
+    /**
      * @return array
      */
     private function getCweMenu()

@@ -17,7 +17,7 @@ class CweController extends AbstractController
         return $this->renderResponse(
             "cwe/$id.html.twig",
             [
-
+                'cwe' => $this->getCweInfoById($id)
             ]
         );
     }
