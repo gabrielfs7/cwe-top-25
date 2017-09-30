@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="root.path"></parameter>
+        <!-- Database -->
+        <parameter key="database.driver">mysql</parameter>
+        <parameter key="database.host">127.0.0.1</parameter>
+        <parameter key="database.name">cleancode</parameter>
+        <parameter key="database.user">root</parameter>
+        <parameter key="database.pass">aluno</parameter>
+
+        <!-- Doctrine -->
+        <parameter key="doctrine.mapping.dir">%root.path%/db/Doctrine/Mapping</parameter>
+        <parameter key="doctrine.proxy.dir">/tmp/doctrine</parameter>
+        <parameter key="doctrine.proxy.namespace">GSoares\CleanCode\Proxy</parameter>
+        <parameter key="doctrine.proxy.auto_generate">true</parameter>
+    </parameters>
+</container>

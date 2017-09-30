@@ -1,0 +1,27 @@
+{% extends 'base/base.html.twig' %}
+{% block title %}<i class="glyphicon glyphicon-alert"></i> CWE/SANS Top 25 Most Dangerous Software Errors{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <p>
+                Examples in PHP for 2011 CWE/SANS Top 25 Most Dangerous Software Errors. Referenced to http://cwe.mitre.org/top25/
+            </p>
+            <table class="table">
+                <tr>
+                    <th>Rank</th>
+                    <th>Score</th>
+                    <th>Id</th>
+                    <th>Description</th>
+                </tr>
+                {% for cweItem in cweMenu %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ cweItem.score }}</td>
+                        <td><a href="/cwe/{{ cweItem.id }}">{{ cweItem.id }}</a></td>
+                        <td>{{ cweItem.description }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

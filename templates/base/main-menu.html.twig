@@ -1,0 +1,37 @@
+<nav class="navbar-default navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="collapsed navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="navbar-brand">CWE Top 25k</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="glyphicon glyphicon-cog"></i>
+                        Top 25 <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for cweItem in cweMenu %}
+                        <li>
+                            <a href="/cwe/{{ cweItem.id }}">
+                                {{ cweItem.id }} (score {{ cweItem.score }}) {{ cweItem.description }}
+                            </a>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <a href="/accounts/create">
+                                <i class="glyphicon glyphicon-plus-sign"></i> Create
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
