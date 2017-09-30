@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="doctrine.cache" class="\Doctrine\Common\Cache\ArrayCache" />
+        <service id="doctrine.mapping.locator" class="Doctrine\Common\Persistence\Mapping\Driver\DefaultFileLocator">
+            <argument type="collection">
+                <argument>%doctrine.mapping.dir%</argument>
+            </argument>
+            <argument>.dcm.xml</argument>
+        </service>
+
+        <service id="doctrine.mapping.driver" class="Doctrine\ORM\Mapping\Driver\XmlDriver">
+            <argument type="service" id="doctrine.mapping.locator"/>
+        </service>
+        <service id="doctrine.config" class="Doctrine\ORM\Configuration">
+            <call method="setMetadataCacheImpl">
+                <argument type="service" id="doctrine.cache" />
+            </call>
+            <call method="setQueryCacheImpl">
+                <argument type="service" id="doctrine.cache" />
+            </call>
+            <call method="setProxyDir">
+                <argument>%doctrine.proxy.dir%</argument>
+            </call>
+            <call method="setProxyNamespace">
+                <argument>%doctrine.proxy.namespace%</argument>
+            </call>
+            <call method="setAutoGenerateProxyClasses">
+                <argument>%doctrine.proxy.auto_generate%</argument>
+            </call>
+            <call method="setMetadataDriverImpl">
+                <argument type="service" id="doctrine.mapping.driver" />
+            </call>
+        </service>
+        <service id="doctrine.entity_manager" class="Doctrine\ORM\EntityManager">
+            <factory class="Doctrine\ORM\EntityManager" method="create"/>
+            <argument type="collection">
+                <argument key="dbname">%database.name%</argument>
+                <argument key="user">%database.user%</argument>
+                <argument key="password">%database.pass%</argument>
+                <argument key="host">%database.host%</argument>
+                <argument key="driver">pdo_%database.driver%</argument>
+                <argument key="charset">utf8</argument>
+            </argument>
+            <argument type="service" id="doctrine.config" />
+        </service>
+
+        <!-- DataBase Connection -->
+        <service id="database.connection" class="\PDO">
+            <argument>%database.driver%:host=%database.host%;dbname=%database.name%</argument>
+            <argument>%database.user%</argument>
+            <argument>%database.pass%</argument>
+        </service>
+    </services>
+</container>

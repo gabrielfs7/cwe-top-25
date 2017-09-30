@@ -6,10 +6,10 @@
         <parameter key="root.path"></parameter>
         <!-- Database -->
         <parameter key="database.driver">mysql</parameter>
-        <parameter key="database.host">127.0.0.1</parameter>
-        <parameter key="database.name">cleancode</parameter>
+        <parameter key="database.host">dockerphp_mysql</parameter>
+        <parameter key="database.name">cwe</parameter>
         <parameter key="database.user">root</parameter>
-        <parameter key="database.pass">aluno</parameter>
+        <parameter key="database.pass">admin</parameter>
 
         <!-- Doctrine -->
         <parameter key="doctrine.mapping.dir">%root.path%/db/Doctrine/Mapping</parameter>
