@@ -6,4 +6,7 @@
     <route id="index" path="/">
         <default key="_controller">controller.index:indexAction</default>
     </route>
+    <route id="cwe" path="cwe-{id}">
+        <default key="_controller">controller.cwe:indexAction</default>
+    </route>
 </routes>

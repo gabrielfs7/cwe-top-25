@@ -10,5 +10,7 @@
         </service>
         <service id="controller.index" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\IndexController">
         </service>
+        <service id="controller.cwe" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\CweController">
+        </service>
     </services>
 </container>

@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{ loop.index }}</td>
                         <td>{{ cweItem.score }}</td>
-                        <td><a href="/cwe/{{ cweItem.id }}">{{ cweItem.id }}</a></td>
+                        <td><a href="/cwe-{{ cweItem.id|replace({'CWE-' : ''}) }}">{{ cweItem.id }}</a></td>
                         <td>{{ cweItem.description }}</td>
                     </tr>
                 {% endfor %}

@@ -19,7 +19,7 @@
                     <ul class="dropdown-menu">
                         {% for cweItem in cweMenu %}
                         <li>
-                            <a href="/cwe/{{ cweItem.id }}">
+                            <a href="/cwe-{{ cweItem.id|replace({'CWE-' : ''}) }}">
                                 {{ cweItem.id }} (score {{ cweItem.score }}) {{ cweItem.description }}
                             </a>
                         </li>
