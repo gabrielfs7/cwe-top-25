@@ -1,5 +1,5 @@
 {% extends 'base/base.html.twig' %}
-{% block title %}<i class="glyphicon glyphicon-alert"></i> {{ cwe.id }}{% endblock %}
+{% block title %}{{ cwe.id }}{% endblock %}
 {% block content %}
 <div class="row">
     <div class="col-sm-12">
@@ -23,6 +23,24 @@
                     <a href="{{ cweLink }}">
                         {{ cweLink }}
                     </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Solution</th>
+                <td>
+                    {% block solution %}{% endblock %}
+                </td>
+            </tr>
+            <tr>
+                <th>PHP Sample class</th>
+                <td>
+                    {{ sampleClass.name }}
+                    <a href="javascript:void(0);" onclick="$('.sample-content').toggle();">
+                        <i class="glyphicon glyphicon-eye-open"></i>
+                    </a>
+                    <div class="sample-content" style="display: none">
+                        <pre>{{ sampleClass.content }}</pre>
+                    </div>
                 </td>
             </tr>
         </table>

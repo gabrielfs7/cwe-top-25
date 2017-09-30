@@ -1,11 +1,13 @@
 {% extends 'cwe/base.html.twig' %}
+{% block solution %}
+You have to escape the dynamic parameters by binding them through PDO.
+{% endblock %}
 {% block subcontent %}
 <p class="alert alert-info">
     Try to type username <strong>unknown</strong> and password <strong>name' OR 'a'='a</strong>.
 
     It will add an <strong>OR</strong> condition to the query, allowing get the first user even if it does not exist.
 </p>
-
 {% if user %}
     <div class="alert alert-success">
         User found:

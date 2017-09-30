@@ -17,13 +17,25 @@ class CweController extends AbstractController
      */
     public function indexAction(Request $request, $id)
     {
-        $responseParams = $this->container
-            ->get("cwe.$id.sample")
-            ->processRequest($request);
+        $service = $this->container
+            ->get("cwe.$id.sample");
+
+        $responseParams = $service->processRequest($request);
+        $className = get_class($service);
+        $content = file_get_contents(__DIR__ . '/../../' . str_replace(['GSoares\CweTop25\\', '\\'], ['', '/'], $className) . '.php');
 
         return $this->renderResponse(
             "cwe/$id.html.twig",
-            array_merge(['cwe' => $this->getCweInfoById($id)], $responseParams)
+            array_merge(
+                [
+                    'sampleClass' => [
+                        'name' => $className,
+                        'content' => $content,
+                    ],
+                    'cwe' => $this->getCweInfoById($id)
+                ],
+                $responseParams
+            )
         );
     }
 }
