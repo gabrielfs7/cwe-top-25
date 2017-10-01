@@ -5,10 +5,8 @@ namespace GSoares\CweTop25\Entity;
 class User
 {
 
-    /**
-     * @var int
-     */
-    private $id;
+    use IdTrait;
+    use ModificationTimeTrait;
 
     /**
      * @var string
@@ -26,37 +24,6 @@ class User
     private $passwordSalt;
 
     /**
-     * @var \DateTime
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
-     * @var \DateTime
-     */
-    private $deletedAt;
-
-    /**
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    /**
      * @return string
      */
     public function getName()
@@ -68,7 +35,7 @@ class User
      * @param string $name
      * @return $this
      */
-    public function setName($name)
+    public function changeName($name)
     {
         $this->name = $name;
 
@@ -87,7 +54,7 @@ class User
      * @param string $password
      * @return $this
      */
-    public function setPassword($password)
+    public function changePassword($password)
     {
         $this->password = $password;
 
@@ -106,66 +73,9 @@ class User
      * @param string $passwordSalt
      * @return $this
      */
-    public function setPasswordSalt($passwordSalt)
+    public function changePasswordSalt($passwordSalt)
     {
         $this->passwordSalt = $passwordSalt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     * @return $this
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     * @return $this
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * @param \DateTime $deletedAt
-     * @return $this
-     */
-    public function setDeletedAt(\DateTime $deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
 
         return $this;
     }

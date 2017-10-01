@@ -1,8 +1,14 @@
 {% extends 'base/base.html.twig' %}
 {% block title %}PHP Code Sniffer{% endblock %}
 {% block content %}
+<h3>PSR errors:</h3>
 <pre>
-{% include 'phpcs/full.html.twig' %}
 {% include 'phpcs/summary.html.twig' %}
+{% include 'phpcs/full.html.twig' %}
+</pre>
+<h3>Object Calisthenics errors:</h3>
+<pre>
+{% include 'phpcs/object-calisthenics-summary.html.twig' %}
+{% include 'phpcs/object-calisthenics-full.html.twig' %}
 </pre>
 {% endblock %}
