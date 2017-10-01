@@ -9,13 +9,13 @@
     <route id="cwe" path="/cwe-{id}">
         <default key="_controller">controller.cwe:indexAction</default>
     </route>
-    <route id="quality_control_phpunit" path="/quality-control/phpunit">
+    <route id="quality_control_phpunit" path="quality-control/phpunit">
         <default key="_controller">controller.qualityControl:phpUnitAction</default>
     </route>
-    <route id="quality_control_phpcs" path="/quality-control/phpcs">
+    <route id="quality_control_phpcs" path="quality-control/phpcs">
         <default key="_controller">controller.qualityControl:phpCsAction</default>
     </route>
-    <route id="quality_control_phpmd" path="/quality-control/phpmd">
+    <route id="quality_control_phpmd" path="quality-control/phpmd">
         <default key="_controller">controller.qualityControl:phpMdAction</default>
     </route>
 </routes>
