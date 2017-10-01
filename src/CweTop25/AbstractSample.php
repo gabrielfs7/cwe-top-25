@@ -10,7 +10,7 @@ abstract class AbstractSample implements SampleInterface
      */
     public function getFileContent()
     {
-        $className = __CLASS__;
+        $className = get_called_class();
 
         return file_get_contents(
             __DIR__ . '/' . str_replace(['GSoares\CweTop25\\', '\\'], ['', '/'], $className) . '.php'
