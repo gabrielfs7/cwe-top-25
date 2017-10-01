@@ -2,9 +2,10 @@
 
 namespace GSoares\CweTop25\Cwe89;
 
+use GSoares\CweTop25\AbstractSample;
 use Symfony\Component\HttpFoundation\Request;
 
-class Sample
+class Sample extends AbstractSample
 {
 
     /**

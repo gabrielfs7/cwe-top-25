@@ -3,11 +3,18 @@
 You have to escape the dynamic parameters by binding them through PDO.
 {% endblock %}
 {% block subcontent %}
-<p class="alert alert-info">
-    Try to type username <strong>unknown</strong> and password <strong>name' OR 'a'='a</strong>.
+<div class="alert alert-info">
+    <ul>
+        <li>
+            Try to type username &quot;<strong>unknown</strong>&quot; and password &quot;<strong>name' OR 'a'='a</strong>&quot;.
 
-    It will add an <strong>OR</strong> condition to the query, allowing get the first user even if it does not exist.
-</p>
+            It will add an &quot;<strong>OR</strong>&quot; condition to the query, allowing get the first user even if it does not exist.
+        </li>
+        <li>
+            If you type password as &quot;<strong>name'; DELETE FROM User; --</strong>&quot; it will remove all the users.
+        </li>
+    </ul>
+</div>
 {% if user %}
     <div class="alert alert-success">
         User found:

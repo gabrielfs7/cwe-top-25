@@ -6,5 +6,8 @@
         <service id="cwe.89.sample" class="GSoares\CweTop25\Cwe89\Sample">
             <argument id="database.connection" type="service"/>
         </service>
+
+        <service id="cwe.78.sample" class="GSoares\CweTop25\Cwe78\Sample">
+        </service>
     </services>
 </container>

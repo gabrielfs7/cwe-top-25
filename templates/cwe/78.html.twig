@@ -1,0 +1,55 @@
+{% extends 'cwe/base.html.twig' %}
+{% block solution %}
+    <ul>
+        <li>
+            Follow the least privilege principle (Who can access this resource?
+            What action is allowed?). As more restrict is the resource better.
+        </li>
+        <li>
+            You should always neutralize the input string too.
+            In PHP you can use this by using
+            <a href="http://php.net/manual/en/function.escapeshellcmd.php">escapeshellcmd</a> and
+            <a href="http://php.net/manual/en/function.escapeshellarg.php">escapeshellarg</a>
+        </li>
+        <li>
+            Good idea to use a white list of allowed characters too.
+        </li>
+        <li>
+            Can also check if the string contains only alphanumeric characters using regular expression
+            <a href="http://php.net/manual/en/function.preg-match.php">preg_match</a> or
+            <a href="http://php.net/manual/en/function.ctype-alnum.php">ctype_alnum</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block subcontent %}
+<div class="alert alert-info">
+    <ul>
+        <li>This could allow attackers to execute unexpected, dangerous commands directly on the Operating System.</li>
+        <li>
+            Ex: If you provide the input &quot;<strong>;cat ~/.ssh/id_rsa</strong>&quot;
+            and it is not correctly neutralized it will allow user to access your
+            ssh private key (<strong>ls -lha /home/;cat ~/.ssh/id_rsa</strong>) or maybe
+            remove the complete content of the server if you type &quot;<strong>;rm -rf /</strong>&quot;
+        </li>
+    </ul>
+</div>
+{% if command %}
+    <div class="alert alert-success">
+        <ul>
+            <li>Command = {{ command.raw }}</li>
+            <li>Response = {{ command.response }}</li>
+        </ul>
+    </div>
+{% endif %}
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <input type="text" name="username" value=";cat ~/.ssh/id_rsa" class="form-control">
+        </div>
+        <div class="col-md-6 text-left">
+            <input name="submit" type="submit" class="btn btn-danger" value="Unsafe submit"/>
+            <input name="submit" type="submit" class="btn btn-success" value="Safe submit"/>
+        </div>
+    </div>
+</form>
+{% endblock %}

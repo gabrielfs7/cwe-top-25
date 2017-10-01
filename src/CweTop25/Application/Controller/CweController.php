@@ -20,21 +20,17 @@ class CweController extends AbstractController
         $service = $this->container
             ->get("cwe.$id.sample");
 
-        $responseParams = $service->processRequest($request);
-        $className = get_class($service);
-        $content = file_get_contents(__DIR__ . '/../../' . str_replace(['GSoares\CweTop25\\', '\\'], ['', '/'], $className) . '.php');
-
         return $this->renderResponse(
             "cwe/$id.html.twig",
             array_merge(
                 [
                     'sampleClass' => [
-                        'name' => $className,
-                        'content' => $content,
+                        'name' => get_class($service),
+                        'content' => $service->getFileContent(),
                     ],
                     'cwe' => $this->getCweInfoById($id)
                 ],
-                $responseParams
+                $service->processRequest($request)
             )
         );
     }
