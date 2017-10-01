@@ -2,7 +2,7 @@
 <ruleset name="PHP_CodeSniffer">
     <description>Project Standards.</description>
     <file>src</file>
-    <file>test</file>
+    <file>tests</file>
     <report>summary</report>
     <bootstrap>bootstrap.php</bootstrap>
     <reportWidth>5</reportWidth>

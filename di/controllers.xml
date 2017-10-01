@@ -8,9 +8,8 @@
                 <argument type="service" id="container" />
             </call>
         </service>
-        <service id="controller.index" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\IndexController">
-        </service>
-        <service id="controller.cwe" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\CweController">
-        </service>
+        <service id="controller.index" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\IndexController"/>
+        <service id="controller.cwe" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\CweController"/>
+        <service id="controller.qualityControl" parent="controller.abstract" class="GSoares\CweTop25\Application\Controller\QualityControlController"/>
     </services>
 </container>
