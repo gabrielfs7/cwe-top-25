@@ -39,3 +39,23 @@ bin/doctrine migrations:migrate
 ```
 http://cwe-top-25/
 ```
+
+- Executing quality control tools
+
+PHP CodeSniffer with PSRs and Object Calisthenics Validation
+
+```
+bin/quality-control/cs.sh
+```
+
+PHP MD
+
+```
+bin/quality-control/md.sh
+```
+
+PHP Unit
+
+```
+bin/quality-control/test.sh
+```
