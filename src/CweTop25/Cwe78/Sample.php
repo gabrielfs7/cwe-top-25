@@ -19,8 +19,9 @@ class Sample extends AbstractSample
         }
 
         $command = null;
-        $externalParameter = $request->request->all();
-        $username = isset($externalParameter['username']) ? $externalParameter['username'] : null;
+        $parameters = $this->getRequestParameters($request);
+
+        $username = isset($parameters['username']) ? $parameters['username'] : null;
 
         if ($request->get('submit') == 'Unsafe submit' && $username) {
             $command = $this->unsafeCommand($username);

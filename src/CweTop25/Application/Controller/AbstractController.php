@@ -20,9 +20,12 @@ class AbstractController implements ControllerInterface
      */
     public function renderResponse($templateFile, array $context = [], $statusCode = 200)
     {
-        $content = $this->container
-            ->get('twig.environment')
-            ->render($templateFile, array_merge($context, ['cweMenu' => $this->getCweMenu()]));
+        $templateParameters = array_merge($context, ['cweMenu' => $this->getCweMenu()]);
+
+        $twigEnvironment = $this->container
+            ->get('twig.environment');
+
+        $content = $twigEnvironment->render($templateFile, $templateParameters);
 
         return new Response($content, $statusCode);
     }

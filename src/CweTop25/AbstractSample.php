@@ -2,6 +2,8 @@
 
 namespace GSoares\CweTop25;
 
+use Symfony\Component\HttpFoundation\Request;
+
 abstract class AbstractSample implements SampleInterface
 {
 
@@ -15,5 +17,16 @@ abstract class AbstractSample implements SampleInterface
         return file_get_contents(
             __DIR__ . '/' . str_replace(['GSoares\CweTop25\\', '\\'], ['', '/'], $className) . '.php'
         );
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    protected function getRequestParameters(Request $request)
+    {
+        $parametersBag = $request->request;
+
+        return $parametersBag->all();
     }
 }

@@ -32,8 +32,7 @@ class Sample extends AbstractSample
         }
 
         $user = null;
-        $parameters = $request->request->all();
-
+        $parameters = $this->getRequestParameters($request);
 
         if ($request->get('submit') == 'Unsafe submit') {
             $user = $this->unsafeQuery($parameters);

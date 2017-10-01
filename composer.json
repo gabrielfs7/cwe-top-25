@@ -24,7 +24,8 @@
     "squizlabs/php_codesniffer" : "3.1.0",
     "phpmd/phpmd": "2.6.0",
     "phpmetrics/phpmetrics" : "v2.3.0",
-    "phpbench/phpbench": "dev-master@dev"
+    "phpbench/phpbench": "dev-master@dev",
+    "object-calisthenics/phpcs-calisthenics-rules": "v3.0.1"
   },
   "autoload" : {
     "psr-4" : {
