@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Possible configurations: https://phpunit.de/manual/current/pt_br/appendixes.configuration.html -->
+<phpunit
+    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation = "http://schema.phpunit.de/4.6/phpunit.xsd"
+    beStrictAboutTestsThatDoNotTestAnything = "true"
+    checkForUnintentionallyCoveredCode = "true"
+    beStrictAboutOutputDuringTests = "true"
+
+    beStrictAboutTestSize = "true"
+    timeoutForLargeTests = "1"
+    timeoutForMediumTests = "1"
+    timeoutForSmallTests = "1"
+
+    backupGlobals = "false"
+    backupStaticAttributes = "false"
+    colors = "true"
+    convertErrorsToExceptions = "true"
+    convertNoticesToExceptions = "true"
+    convertWarningsToExceptions = "true"
+    processIsolation = "false"
+    stopOnFailure = "false"
+    syntaxCheck = "true"
+    bootstrap = "bootstrap.php">
+    <testsuites>
+        <testsuite name="Project Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>src/</directory>
+            <exclude>
+                <directory>src/CweTop25/Application</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <log
+            type="testdox-html"
+            target="public/phpunit/testdox.html"
+            charset="UTF-8"
+            highlight="true"
+            lowUpperBound="10"
+            highLowerBound="30"/>
+    </logging>
+</phpunit>

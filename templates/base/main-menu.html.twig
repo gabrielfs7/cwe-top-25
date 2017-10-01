@@ -19,7 +19,7 @@
                         {% for cweItem in cweMenu %}
                         <li>
                             <a href="/cwe-{{ cweItem.id|replace({'CWE-' : ''}) }}">
-                                {{ cweItem.id }} (score {{ cweItem.score }}) {{ cweItem.description }}
+                               {{ cweItem.position }} - {{ cweItem.id }} (score {{ cweItem.score }}) {{ cweItem.description }}
                             </a>
                         </li>
                         {% endfor %}
