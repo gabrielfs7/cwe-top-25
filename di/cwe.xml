@@ -9,5 +9,8 @@
 
         <service id="cwe.78.sample" class="GSoares\CweTop25\Cwe78\Sample">
         </service>
+
+        <service id="cwe.79.sample" class="GSoares\CweTop25\Cwe79\Sample">
+        </service>
     </services>
 </container>

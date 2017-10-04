@@ -1,0 +1,39 @@
+{% extends 'cwe/base.html.twig' %}
+{% block solution %}
+    <ul>
+        <li>...</li>
+    </ul>
+{% endblock %}
+{% block subcontent %}
+<div class="alert alert-info">
+    Cross-site scripting (XSS) vulnerabilities occur when:
+
+    <ul>
+        <li>Untrusted data enters a web application, typically from a web request.</li>
+        <li>The web application dynamically generates a web page that contains this untrusted data.</li>
+        <li>During page generation, the application does not prevent the data from containing content that is executable by a web browser, such as JavaScript, HTML tags, HTML attributes, mouse events, Flash, ActiveX, etc.</li>
+        <li>A victim visits the generated web page through a web browser, which contains malicious script that was injected using the untrusted data.</li>
+        <li>Since the script comes from a web page that was sent by the web server, the victim's web browser executes the malicious script in the context of the web server's domain.</li>
+        <li>This effectively violates the intention of the web browser's same-origin policy, which states that scripts in one domain should not be able to access resources or run code in a different domain.</li>
+    </ul>
+</div>
+{% if command %}
+    <div class="alert alert-success">
+        <ul>
+            <li>Command = {{ command.raw }}</li>
+            <li>Response = {{ command.response }}</li>
+        </ul>
+    </div>
+{% endif %}
+<form method="POST">
+    <div class="row">
+        <div class="col-md-6">
+            <input type="text" name="username" value=";cat ~/.ssh/id_rsa" class="form-control">
+        </div>
+        <div class="col-md-6 text-left">
+            <input name="submit" type="submit" class="btn btn-danger" value="Unsafe submit"/>
+            <input name="submit" type="submit" class="btn btn-success" value="Safe submit"/>
+        </div>
+    </div>
+</form>
+{% endblock %}
