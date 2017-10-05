@@ -14,58 +14,37 @@ class Sample extends AbstractSample
      */
     public function processRequest(Request $request)
     {
-        if ($request->getMethod() != 'POST') {
-            return ['user' => null];
-        }
-
-        $command = null;
         $parameters = $this->getRequestParameters($request);
 
+        $query = isset($parameters['query']) ? $parameters['query'] : null;
         $username = isset($parameters['username']) ? $parameters['username'] : null;
 
-        if ($request->get('submit') == 'Unsafe submit' && $username) {
-            $command = $this->unsafeCommand($username);
+        if ($request->get('submit') == 'Safe submit' && $query) {
+            $query = $this->safeSearch($query);
         }
 
-        if ($request->get('submit') == 'Safe submit' && $username) {
-            $command = $this->safeCommand($username);
+        if (isset($parameters['safe'])) {
+            $username = $this->safeUsername($username);
         }
 
-        return ['command' => $command];
+        return ['search' => $query, 'username' => $username];
+    }
+
+    /**
+     * @param $search
+     * @return \stdClass
+     */
+    private function safeSearch($search)
+    {
+        return htmlentities($search);
     }
 
     /**
      * @param $username
      * @return \stdClass
      */
-    private function unsafeCommand($username)
+    private function safeUsername($username)
     {
-        return $this->executeCommand($username);
-    }
-
-    /**
-     * @param $username
-     * @return \stdClass
-     */
-    private function safeCommand($username)
-    {
-        return [
-            'raw' => $command = escapeshellcmd(escapeshellarg($username)),
-            'response' => system($command)
-        ];
-    }
-
-    /**
-     * @param $username
-     * @return array
-     */
-    private function executeCommand($username)
-    {
-        $command = 'ls -l /home/' . $username;
-
-        return [
-            'raw' => $command,
-            'response' => system($command)
-        ];
+        return preg_replace('/[^0-9a-z]/', '', $username);
     }
 }

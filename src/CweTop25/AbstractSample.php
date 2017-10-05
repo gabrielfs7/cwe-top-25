@@ -25,8 +25,9 @@ abstract class AbstractSample implements SampleInterface
      */
     protected function getRequestParameters(Request $request)
     {
-        $parametersBag = $request->request;
+        $postParametersBag = $request->request;
+        $queryParametersBag = $request->query;
 
-        return $parametersBag->all();
+        return array_merge($postParametersBag->all(), $queryParametersBag->all());
     }
 }
