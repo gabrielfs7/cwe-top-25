@@ -26,7 +26,7 @@ abstract class AbstractSample implements SampleInterface
     /**
      * @return array
      */
-    protected abstract function internalProcess();
+    abstract protected function internalProcess();
 
     /**
      * @return array
