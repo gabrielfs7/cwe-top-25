@@ -3,7 +3,6 @@
 namespace GSoares\CweTop25\Cwe89;
 
 use GSoares\CweTop25\AbstractSample;
-use Symfony\Component\HttpFoundation\Request;
 
 class Sample extends AbstractSample
 {
@@ -22,59 +21,63 @@ class Sample extends AbstractSample
     }
 
     /**
-     * @param Request $request
      * @return array
      */
-    public function processRequest(Request $request)
+    public function internalProcess()
     {
-        if ($request->getMethod() != 'POST') {
-            return ['user' => null];
+        if (!$this->isPost()) {
+            return [];
         }
 
-        $user = null;
-        $parameters = $this->getRequestParameters($request);
-
-        if ($request->get('submit') == 'Unsafe submit') {
-            $user = $this->unsafeQuery($parameters);
+        if ($this->isUnSafeSubmit()) {
+            $user = $this->unsafeQuery();
         }
 
-        if ($request->get('submit') == 'Safe submit') {
-            $user = $this->safeQuery($parameters);
+        if ($this->isSafeSubmit()) {
+            $user = $this->safeQuery();
         }
 
         return ['user' => $user];
     }
 
     /**
-     * @param $externalParameter
      * @return \stdClass
      */
-    private function unsafeQuery(array $externalParameter)
+    private function unsafeQuery()
     {
-        $username = isset($externalParameter['username']) ? $externalParameter['username'] : null;
-        $password = isset($externalParameter['password']) ? $externalParameter['password'] : null;
+        $username = $this->getRequestParameter('username');
+        $password = $this->getRequestParameter('password');
 
         $query = "SELECT * FROM User WHERE name = '" . $username . "' AND password = '" . $password . "'";
 
-        $statement = $this->connection->prepare($query);
-        $statement->execute();
-
-        return $statement->fetchObject();
+        return $this->executeQuery($query);
     }
 
     /**
-     * @param $externalParameter
      * @return \stdClass
      */
-    private function safeQuery(array $externalParameter)
+    private function safeQuery()
     {
-        $username = $externalParameter['username'];
-        $password = $externalParameter['password'];
-
         $query = "SELECT * FROM User WHERE name = ? AND password = ?";
 
+        return $this->executeQuery(
+            $query,
+            [
+                $this->getRequestParameter('username'),
+                $this->getRequestParameter('password')
+            ]
+        );
+    }
+
+    /**
+     * @param $query
+     * @param array $parameters
+     * @return \stdClass
+     */
+    private function executeQuery($query, array $parameters = [])
+    {
         $statement = $this->connection->prepare($query);
-        $statement->execute([$username, $password]);
+        $statement->execute($parameters);
 
         return $statement->fetchObject();
     }

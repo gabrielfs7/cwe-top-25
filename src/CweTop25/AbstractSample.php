@@ -8,6 +8,27 @@ abstract class AbstractSample implements SampleInterface
 {
 
     /**
+     * @var Request
+     */
+    private $request;
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function processRequest(Request $request)
+    {
+        $this->request = $request;
+
+        return $this->internalProcess();
+    }
+
+    /**
+     * @return array
+     */
+    protected abstract function internalProcess();
+
+    /**
      * @return array
      */
     public function getFileContent()
@@ -20,14 +41,35 @@ abstract class AbstractSample implements SampleInterface
     }
 
     /**
-     * @param Request $request
-     * @return array
+     * @param $parameter
+     * @return string
      */
-    protected function getRequestParameters(Request $request)
+    protected function getRequestParameter($parameter)
     {
-        $postParametersBag = $request->request;
-        $queryParametersBag = $request->query;
+        return $this->request->get($parameter);
+    }
 
-        return array_merge($postParametersBag->all(), $queryParametersBag->all());
+    /**
+     * @return bool
+     */
+    protected function isPost()
+    {
+        return $this->request->getMethod() == 'POST';
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isSafeSubmit()
+    {
+        return $this->request->get('submit') == 'Safe submit';
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isUnSafeSubmit()
+    {
+        return $this->request->get('submit') == 'Unsafe submit';
     }
 }

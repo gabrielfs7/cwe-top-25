@@ -3,27 +3,23 @@
 namespace GSoares\CweTop25\Cwe79;
 
 use GSoares\CweTop25\AbstractSample;
-use Symfony\Component\HttpFoundation\Request;
 
 class Sample extends AbstractSample
 {
 
     /**
-     * @param Request $request
      * @return array
      */
-    public function processRequest(Request $request)
+    public function internalProcess()
     {
-        $parameters = $this->getRequestParameters($request);
+        $query = $this->getRequestParameter('query');
+        $username = $this->getRequestParameter('username');
 
-        $query = isset($parameters['query']) ? $parameters['query'] : null;
-        $username = isset($parameters['username']) ? $parameters['username'] : null;
-
-        if ($request->get('submit') == 'Safe submit' && $query) {
+        if ($this->isSafeSubmit() && $query) {
             $query = $this->safeSearch($query);
         }
 
-        if (isset($parameters['safe'])) {
+        if ($this->getRequestParameter('safe')) {
             $username = $this->safeUsername($username);
         }
 
