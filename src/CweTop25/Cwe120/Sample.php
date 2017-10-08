@@ -12,6 +12,11 @@ class Sample extends AbstractSample
      */
     public function internalProcess()
     {
-        return [];
+        return [
+            'sampleFiles' => [
+                'resources/c/cwe120-1',
+                'resources/c/cwe120-2',
+            ]
+        ];
     }
 }

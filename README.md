@@ -26,6 +26,12 @@ composer install
 bin/doctrine migrations:migrate
 ```
 
+- Compile C resources
+
+```
+bin/c/compile-resources.sh
+```
+
 - Use the [cwe-top-25.conf] to your NGinx sites-available configuration.
 
 - Add the following line to your [/etc/hosts]

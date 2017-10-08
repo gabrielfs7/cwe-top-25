@@ -26,19 +26,17 @@ abstract class AbstractSample implements SampleInterface
     /**
      * @return array
      */
-    abstract protected function internalProcess();
+    public function getFileContent()
+    {
+        $classPath = str_replace(['GSoares\CweTop25\\', '\\'], ['', '/'], get_called_class());
+
+        return file_get_contents(__DIR__ . "/$classPath.php");
+    }
 
     /**
      * @return array
      */
-    public function getFileContent()
-    {
-        $className = get_called_class();
-
-        return file_get_contents(
-            __DIR__ . '/' . str_replace(['GSoares\CweTop25\\', '\\'], ['', '/'], $className) . '.php'
-        );
-    }
+    abstract protected function internalProcess();
 
     /**
      * @param $parameter
